@@ -27,7 +27,7 @@ class MainClass {
         carroEconomico = carros_Nome[i];
       }
     }
-    Console.WriteLine("O carro mais economico " + carroEconomico);
+    Console.WriteLine("O carro mais economico é o " + carroEconomico);
 
     for (int i = 0; i < carros_Nome.Count; i++)
     {
@@ -37,5 +37,44 @@ class MainClass {
       Console.WriteLine("Carro "+ carros_Nome[i] +", quantos KM por litro que irá rodar "+ acharConsumoL +", Valor gastará R$"+ valorGasto);
     }
 
+    Console.WriteLine("============================");
+    /* Solução do professor */
+
+    string continuar = "s", marca;
+    double consumo;
+
+    Carro auto = new Carro("Teste", 0);
+    List<Carro> listaCarros = new List<Carro>();
+
+    while(continuar == "s")
+    {
+      Console.WriteLine("Marca do carro:");
+      marca = Console.ReadLine();
+      Console.WriteLine("KM/L do carro:");
+      consumo = double.Parse(Console.ReadLine());
+      auto = new Carro(marca, consumo);
+      listaCarros.Add(auto);
+      Console.WriteLine("Continuar S/N?");
+      continuar = Console.ReadLine();
+    }
+
+    // Cria uma variavel abstrata do tipo "Carro".
+    Carro menor_consumo = listaCarros[0];
+
+    for(int i = 1; i < listaCarros.Count; i++)
+    {
+      if(listaCarros[i].getConsumo() > menor_consumo.getConsumo())
+      {
+        menor_consumo = listaCarros[i];
+      }
+    }
+    Console.WriteLine("Marca de menor consumor "+ menor_consumo.getMarca() +" Consumo de "+ menor_consumo.getConsumo() +"KM/L");
+
+    for(int i = 0; i < listaCarros.Count; i++)
+    {
+      Console.WriteLine("Marca "+ listaCarros[i].getMarca());
+      Console.WriteLine("Litros gastos em 1000KM: "+ 1000 / listaCarros[i].getConsumo());
+      Console.WriteLine("Valor gasto a percorrer 1000 KM: "+ (1000 / listaCarros[i].getConsumo()) * 4.89);
+    }
   }
 }
